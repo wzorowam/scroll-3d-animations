@@ -1,0 +1,9 @@
+{
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/watch", "destination": "/watch.html" },
+    { "source": "/watch/", "destination": "/watch.html" }
+  ]
+}

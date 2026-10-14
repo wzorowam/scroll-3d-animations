@@ -1,0 +1,35 @@
+[
+  {
+    "slug": "watch",
+    "title": "The Watchmaker's Bench",
+    "kicker": "Pocket watch",
+    "summary": "Scroll drives the tools. Rust flakes away, the case turns, and a dissolve reveals the polished watch.",
+    "status": "ready",
+    "page": "watch.html",
+    "accent": "#c6a15a"
+  },
+  {
+    "slug": "sneaker",
+    "title": "Sneaker Restoration",
+    "kicker": "Footwear",
+    "summary": "A worn trainer cleaned, rebuilt, and finished. Registered for a later reel.",
+    "status": "planned",
+    "accent": "#8d9a86"
+  },
+  {
+    "slug": "coffee",
+    "title": "Coffee Bean to Espresso",
+    "kicker": "Extraction",
+    "summary": "From a dry bean to a pulled shot. Registered for a later reel.",
+    "status": "planned",
+    "accent": "#a86a45"
+  },
+  {
+    "slug": "car",
+    "title": "Car Detailing Reveal",
+    "kicker": "Coachwork",
+    "summary": "Dust, wash, and a last-pass reveal. Registered for a later reel.",
+    "status": "planned",
+    "accent": "#7f8c9a"
+  }
+]

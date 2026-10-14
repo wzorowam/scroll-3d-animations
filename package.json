@@ -1,0 +1,22 @@
+{
+  "name": "scroll-3d-animations",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "shots": "playwright test"
+  },
+  "dependencies": {
+    "@fontsource/fraunces": "^5.2.8",
+    "@fontsource/outfit": "^5.2.8",
+    "gsap": "^3.13.0",
+    "lenis": "^1.3.11",
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "vite": "^6.3.6"
+  }
+}
