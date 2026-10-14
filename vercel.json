@@ -4,6 +4,8 @@
   "outputDirectory": "dist",
   "rewrites": [
     { "source": "/watch", "destination": "/watch.html" },
-    { "source": "/watch/", "destination": "/watch.html" }
+    { "source": "/watch/", "destination": "/watch.html" },
+    { "source": "/coffee", "destination": "/coffee.html" },
+    { "source": "/coffee/", "destination": "/coffee.html" }
   ]
 }

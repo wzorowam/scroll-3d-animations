@@ -46,3 +46,12 @@ The gallery and the Vite inputs read the registry. Planned cards stay on the ind
 - **90%** — polished watch, tools withdrawn, light on the metal
 
 Mobile caps device pixel ratio, stays under 25 draw calls, and pauses the loop when the stage leaves the viewport. `prefers-reduced-motion`, a missing WebGL context, or a low-memory device gets a still instead of the reel. `?motion=reduce` and `?motion=full` override that for checks.
+
+## Coffee bean
+
+`/coffee` pins a 400vh reel on the same core. Scroll progress:
+
+- **0%** — a whole roasted bean on the bar, tools at rest
+- **30%** — the blade opens the seam and chaff falls
+- **60%** — grounds bloom, the subject turns, and the dissolve is halfway
+- **90%** — the finished espresso, tools withdrawn, light on the crema

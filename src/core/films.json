@@ -20,8 +20,9 @@
     "slug": "coffee",
     "title": "Coffee Bean to Espresso",
     "kicker": "Extraction",
-    "summary": "From a dry bean to a pulled shot. Registered for a later reel.",
-    "status": "planned",
+    "summary": "The bean cracks, chaff falls, the shot turns, and a dissolve reveals the espresso.",
+    "status": "ready",
+    "page": "coffee.html",
     "accent": "#a86a45"
   },
   {
