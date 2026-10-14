@@ -150,6 +150,39 @@
   outline-offset: 3px;
 }
 
+.card--ready ~ .card--ready {
+  grid-column: 1 / -1;
+  min-height: 320px;
+}
+
+.card--ready ~ .card--ready h2 {
+  max-width: 16ch;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+}
+
+.medallion--car {
+  width: 210px;
+  height: 78px;
+  border-radius: 34px 40px 12px 12px;
+  background: linear-gradient(#314058, #1a212c);
+  box-shadow:
+    -58px 18px 0 -2px #121418,
+    54px 18px 0 -2px #121418,
+    0 22px 40px rgba(0, 0, 0, 0.35);
+}
+
+.medallion--car::before {
+  width: 72px;
+  height: 28px;
+  left: 64px;
+  top: -22px;
+  border-radius: 14px 16px 2px 2px;
+  background: #243246;
+  transform: none;
+}
+
+.medallion--car::after { content: none; }
+
 .card--ready:hover { border-color: rgba(198, 161, 90, 0.7); }
 
 .home__foot {

@@ -28,8 +28,9 @@
     "slug": "car",
     "title": "Car Detailing Reveal",
     "kicker": "Coachwork",
-    "summary": "Dust, wash, and a last-pass reveal. Registered for a later reel.",
-    "status": "planned",
+    "summary": "Scroll drives the mitt and pad. Dirt falls away, the coupe turns, and a dissolve reveals the clearcoat.",
+    "status": "ready",
+    "page": "car.html",
     "accent": "#7f8c9a"
   }
 ]
