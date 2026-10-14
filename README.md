@@ -46,3 +46,14 @@ The gallery and the Vite inputs read the registry. Planned cards stay on the ind
 - **90%** — polished watch, tools withdrawn, light on the metal
 
 Mobile caps device pixel ratio, stays under 25 draw calls, and pauses the loop when the stage leaves the viewport. `prefers-reduced-motion`, a missing WebGL context, or a low-memory device gets a still instead of the reel. `?motion=reduce` and `?motion=full` override that for checks.
+
+## Car detailing
+
+`/car` pins a 400vh reel on the same core. Scroll progress:
+
+- **0%** — dusty coupe on the turntable, mitt and polisher at rest
+- **30%** — the mitt crosses the panel and dirt falls away
+- **60%** — the coupe is mid-spin, the pad is on the paint, the dissolve is halfway
+- **90%** — clearcoat revealed, tools withdrawn, light on the finish
+
+The same mobile budget applies: capped device pixel ratio, under 25 draw calls, and the loop pauses when the stage leaves the viewport.

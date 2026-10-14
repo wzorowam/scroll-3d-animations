@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0c0b0a" />
+    <meta name="description" content="A scroll-driven detailing reveal. Dust lifts off a coupe, the car turns, and a dissolve shows the finished paint." />
+    <title>The Detailing Bay — Scroll Studio</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip" href="#reel">Skip to film</a>
+    <main id="film">
+      <section class="reel" id="reel" data-pin-root>
+        <div class="reel__stage" data-pin>
+          <canvas class="reel__canvas" data-canvas aria-label="Coupe on a detailing turntable"></canvas>
+          <header class="topbar">
+            <a class="brand" href="/">Scroll Studio</a>
+            <p class="chapter" data-kicker>01  Dull</p>
+          </header>
+          <div class="caption" aria-live="polite">
+            <h1 data-title>Left in the dust</h1>
+            <p data-body>A coupe under road film. The mitt and pad are still.</p>
+          </div>
+          <div class="rail" aria-hidden="true"><span data-rail></span></div>
+        </div>
+      </section>
+      <footer class="colophon">
+        <span>End of the reel</span>
+        <a href="/">All films</a>
+      </footer>
+    </main>
+    <div class="fallback" data-fallback hidden>
+      <header class="topbar" style="position: relative; padding-left: 0; padding-right: 0;">
+        <a class="brand" href="/">Scroll Studio</a>
+        <p class="chapter">Still</p>
+      </header>
+      <div class="fallback__still" role="img" aria-label="Detailed coupe on a dark bay floor">
+        <div class="still-car"></div>
+      </div>
+      <ol class="beats">
+        <li>
+          <span>01  Dull</span>
+          <h2>Left in the dust</h2>
+          <p>A coupe under road film. The mitt and pad are still.</p>
+        </li>
+        <li>
+          <span>02  Lift</span>
+          <h2>Dirt lets go</h2>
+          <p>The mitt works the panel. Grit falls away in a scatter.</p>
+        </li>
+        <li>
+          <span>03  Turn</span>
+          <h2>Pad on paint</h2>
+          <p>The coupe turns on the disc while the polisher finds the depth.</p>
+        </li>
+        <li>
+          <span>04  Reveal</span>
+          <h2>The dissolve</h2>
+          <p>The dull coat gives way. Clearcoat catches the bay light.</p>
+        </li>
+      </ol>
+    </div>
+    <script type="module" src="/src/animations/car/main.js"></script>
+  </body>
+</html>
