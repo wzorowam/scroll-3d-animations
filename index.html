@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0c0b0a" />
+    <meta name="description" content="Scroll Studio. Pinned 3D films driven by the scroll." />
+    <title>Scroll Studio</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip" href="#films">Skip to films</a>
+    <main class="home">
+      <header class="home__bar">
+        <a class="brand" href="/">Scroll Studio</a>
+        <span data-count>Films</span>
+      </header>
+      <section class="home__intro">
+        <h1>Films driven by the scroll.</h1>
+        <p>Pinned scenes on a dark bench. Each film is its own folder. The core — scroll, dissolve, particles, fallback — stays shared.</p>
+      </section>
+      <div class="grid" id="films" data-grid></div>
+      <footer class="home__foot">
+        <span>One core. One folder per film.</span>
+        <span>Static</span>
+      </footer>
+    </main>
+    <script type="module" src="/src/gallery/main.js"></script>
+  </body>
+</html>

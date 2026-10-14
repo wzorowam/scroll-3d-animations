@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0c0b0a" />
+    <meta name="description" content="A scroll-driven restoration of a rusty pocket watch on a watchmaker's bench." />
+    <title>The Watchmaker's Bench — Scroll Studio</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip" href="#reel">Skip to film</a>
+    <main id="film">
+      <section class="reel" id="reel" data-pin-root>
+        <div class="reel__stage" data-pin>
+          <canvas class="reel__canvas" data-canvas aria-label="Pocket watch on a watchmaker's bench"></canvas>
+          <header class="topbar">
+            <a class="brand" href="/">Scroll Studio</a>
+            <p class="chapter" data-kicker>01  Neglected</p>
+          </header>
+          <div class="caption" aria-live="polite">
+            <h1 data-title>Left on the bench</h1>
+            <p data-body>A pocket watch, seized with rust. The tools are still.</p>
+          </div>
+          <div class="rail" aria-hidden="true"><span data-rail></span></div>
+        </div>
+      </section>
+      <footer class="colophon">
+        <span>End of the reel</span>
+        <a href="/">All films</a>
+      </footer>
+    </main>
+    <div class="fallback" data-fallback hidden>
+      <header class="topbar" style="position: relative; padding-left: 0; padding-right: 0;">
+        <a class="brand" href="/">Scroll Studio</a>
+        <p class="chapter">Still</p>
+      </header>
+      <div class="fallback__still" role="img" aria-label="Polished pocket watch on a dark bench">
+        <div class="still-watch"></div>
+      </div>
+      <ol class="beats">
+        <li>
+          <span>01  Neglected</span>
+          <h2>Left on the bench</h2>
+          <p>A pocket watch, seized with rust. The tools are still.</p>
+        </li>
+        <li>
+          <span>02  Scale</span>
+          <h2>Flakes let go</h2>
+          <p>The scraper works the case. Rust falls away in a scatter.</p>
+        </li>
+        <li>
+          <span>03  Burnish</span>
+          <h2>Cloth on steel</h2>
+          <p>A soft pass brings the metal back while the watch turns.</p>
+        </li>
+        <li>
+          <span>04  Gleam</span>
+          <h2>The dissolve</h2>
+          <p>Tarnish gives way. The polished watch catches the light.</p>
+        </li>
+      </ol>
+    </div>
+    <script type="module" src="/src/animations/watch/main.js"></script>
+  </body>
+</html>
