@@ -57,7 +57,8 @@ test('gallery registers four films', async ({ page }, testInfo) => {
   await expect(page.getByRole('heading', { name: 'Coffee Bean to Espresso' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Car Detailing Reveal' })).toBeVisible();
   await expect(page.getByRole('link', { name: /Watchmaker/ })).toHaveAttribute('href', '/watch');
-  await expect(page.locator('.card--soon')).toHaveCount(3);
+  await expect(page.getByRole('link', { name: /Sneaker Restoration/ })).toHaveAttribute('href', '/sneaker');
+  await expect(page.locator('.card--soon')).toHaveCount(2);
 });
 
 test('reduced motion uses the still', async ({ page }, testInfo) => {

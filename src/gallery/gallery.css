@@ -66,7 +66,7 @@
 }
 
 .card--ready {
-  grid-column: 1 / 2;
+  grid-column: span 2;
   min-height: 460px;
   background:
     radial-gradient(420px 240px at 80% 20%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 70%),
@@ -105,7 +105,7 @@
 
 .card--ready .card__meta { color: var(--brass-soft); }
 
-.card--soon { color: #d9d3c8; }
+.card--soon { grid-column: span 2; color: #d9d3c8; }
 .card--soon h2 { color: #ebe4d8; }
 
 .medallion {
@@ -145,6 +145,23 @@
   transform: translate(-50%, -85%) rotate(118deg);
 }
 
+.medallion--sneaker {
+  width: 168px;
+  height: 86px;
+  right: 28px;
+  bottom: 86px;
+  border-radius: 40px 48px 26px 28px;
+  background:
+    linear-gradient(#f4efe6, #f4efe6) 22px 16px / 124px 34px no-repeat,
+    linear-gradient(#8d9a86, #8d9a86) 48px 28px / 78px 8px no-repeat,
+    linear-gradient(#f7f4ee, #f7f4ee) 14px 50px / 140px 10px no-repeat,
+    linear-gradient(#c4a06a, #c4a06a) 10px 60px / 148px 14px no-repeat;
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.35);
+}
+
+.medallion--sneaker::before,
+.medallion--sneaker::after { display: none; }
+
 .card:focus-visible {
   outline: 2px solid var(--brass);
   outline-offset: 3px;
@@ -160,11 +177,14 @@
 
 @media (max-width: 980px) {
   .home__intro, .grid { grid-template-columns: 1fr; }
-  .card--ready { grid-column: auto; min-height: 420px; }
+  .card--ready,
+  .card--soon { grid-column: auto; }
+  .card--ready { min-height: 420px; }
 }
 
 @media (max-width: 640px) {
   .home { padding: 22px 18px 48px; }
   .medallion { width: 120px; height: 120px; right: 16px; bottom: 64px; }
+  .medallion--sneaker { width: 112px; height: 58px; right: 16px; bottom: 68px; }
   .home__bar, .home__foot { letter-spacing: 0.12em; }
 }

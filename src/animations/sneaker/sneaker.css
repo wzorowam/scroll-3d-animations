@@ -1,0 +1,210 @@
+.reel { height: 400vh; }
+
+.reel__stage {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: #0c0b0a;
+}
+
+.reel__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+}
+
+.reel__stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 38%, transparent 46%, rgba(0, 0, 0, 0.42) 84%),
+    linear-gradient(to top, rgba(12, 11, 10, 0.72), transparent 26%);
+}
+
+.topbar,
+.caption,
+.rail { z-index: 2; }
+
+.topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 26px 6vw;
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.chapter { margin: 0; color: var(--brass-soft); }
+
+.caption {
+  position: absolute;
+  left: 6vw;
+  bottom: 7vh;
+  max-width: min(26rem, 78vw);
+}
+
+.caption h1 {
+  margin: 0 0 0.35rem;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+}
+
+.caption p {
+  margin: 0;
+  max-width: 28rem;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.45;
+}
+
+.rail {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  width: 1px;
+  height: 26vh;
+  transform: translateY(-50%);
+  background: rgba(244, 239, 230, 0.18);
+}
+
+.rail span {
+  display: block;
+  width: 1px;
+  height: 0%;
+  background: var(--brass);
+}
+
+.colophon {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 28px 6vw 40px;
+  color: var(--muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+}
+
+.fallback {
+  min-height: 100vh;
+  padding: 28px 6vw 64px;
+}
+
+.fallback__still {
+  display: grid;
+  place-items: center;
+  height: min(62vh, 560px);
+  margin: 12px 0 28px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background:
+    radial-gradient(420px 180px at 50% 70%, rgba(141, 154, 134, 0.2), transparent 70%),
+    linear-gradient(#161310, #0c0b0a 70%);
+}
+
+.still-sneaker {
+  position: relative;
+  width: min(340px, 72vw);
+  height: 150px;
+}
+
+.still-sneaker__upper {
+  position: absolute;
+  left: 28px;
+  right: 18px;
+  bottom: 36px;
+  height: 78px;
+  background:
+    radial-gradient(18px 14px at 42% 58%, #2a2622 55%, transparent 58%),
+    linear-gradient(#f4efe6, #f4efe6);
+  border-radius: 16px 78px 12px 18px;
+  box-shadow: inset 0 -10px 0 #e4ddd0;
+}
+
+.still-sneaker__upper::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: -16px;
+  width: 92px;
+  height: 36px;
+  border-radius: 16px 16px 8px 8px;
+  background: #e7e0d4;
+}
+
+.still-sneaker__stripe {
+  position: absolute;
+  left: 78px;
+  right: 86px;
+  bottom: 58px;
+  height: 9px;
+  border-radius: 8px;
+  background: #8d9a86;
+  transform: rotate(-8deg);
+}
+
+.still-sneaker__sole {
+  position: absolute;
+  left: 8px;
+  right: 6px;
+  bottom: 14px;
+  height: 24px;
+  border-radius: 10px 18px 12px 12px;
+  background: linear-gradient(#f7f4ee 0 46%, #c4a06a 46% 100%);
+  box-shadow: 0 18px 28px rgba(0, 0, 0, 0.35);
+}
+
+.beats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.beats h2 {
+  margin: 0 0 8px;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.6rem;
+  letter-spacing: -0.03em;
+}
+
+.beats p { margin: 0; color: var(--muted); line-height: 1.45; }
+
+.beats span {
+  display: block;
+  margin-bottom: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--brass-soft);
+}
+
+@media (max-width: 800px) {
+  .topbar { padding: 18px 18px; letter-spacing: 0.12em; }
+  .caption { left: 18px; right: 18px; bottom: 4vh; }
+  .rail { right: 14px; }
+  .beats { grid-template-columns: 1fr 1fr; }
+  .colophon, .fallback { padding-left: 18px; padding-right: 18px; }
+}
+
+@media (max-width: 560px) {
+  .beats { grid-template-columns: 1fr; }
+  .caption h1 { font-size: 2.4rem; }
+}

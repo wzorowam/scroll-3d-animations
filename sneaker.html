@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0c0b0a" />
+    <meta name="description" content="A scroll-driven restoration of a muddy sneaker on a dark bench." />
+    <title>Sneaker Restoration — Scroll Studio</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip" href="#reel">Skip to film</a>
+    <main id="film">
+      <section class="reel" id="reel" data-pin-root>
+        <div class="reel__stage" data-pin>
+          <canvas class="reel__canvas" data-canvas aria-label="Sneaker being cleaned on a dark bench"></canvas>
+          <header class="topbar">
+            <a class="brand" href="/">Scroll Studio</a>
+            <p class="chapter" data-kicker>01  Worn</p>
+          </header>
+          <div class="caption" aria-live="polite">
+            <h1 data-title>Caked in the road</h1>
+            <p data-body>A trainer left muddy. The brush and cloth are still.</p>
+          </div>
+          <div class="rail" aria-hidden="true"><span data-rail></span></div>
+        </div>
+      </section>
+      <footer class="colophon">
+        <span>End of the reel</span>
+        <a href="/">All films</a>
+      </footer>
+    </main>
+    <div class="fallback" data-fallback hidden>
+      <header class="topbar" style="position: relative; padding-left: 0; padding-right: 0;">
+        <a class="brand" href="/">Scroll Studio</a>
+        <p class="chapter">Still</p>
+      </header>
+      <div class="fallback__still" role="img" aria-label="Restored sneaker on a dark bench">
+        <div class="still-sneaker" aria-hidden="true">
+          <div class="still-sneaker__upper"></div>
+          <div class="still-sneaker__stripe"></div>
+          <div class="still-sneaker__sole"></div>
+        </div>
+      </div>
+      <ol class="beats">
+        <li>
+          <span>01  Worn</span>
+          <h2>Caked in the road</h2>
+          <p>A trainer left muddy. The brush and cloth are still.</p>
+        </li>
+        <li>
+          <span>02  Scrub</span>
+          <h2>Mud lets go</h2>
+          <p>The brush works the upper. Dirt falls away in a scatter.</p>
+        </li>
+        <li>
+          <span>03  Turn</span>
+          <h2>Cloth on leather</h2>
+          <p>A soft pass follows the spin. The grime starts to break.</p>
+        </li>
+        <li>
+          <span>04  Restored</span>
+          <h2>The clean shoe</h2>
+          <p>Mud gives way. The restored sneaker catches the light.</p>
+        </li>
+      </ol>
+    </div>
+    <script type="module" src="/src/animations/sneaker/main.js"></script>
+  </body>
+</html>

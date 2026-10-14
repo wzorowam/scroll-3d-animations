@@ -22,7 +22,7 @@ films.forEach((film, index) => {
     <span class="card__index">${number}  ${film.kicker}</span>
     <h2>${film.title}</h2>
     <p>${film.summary}</p>
-    ${ready ? '<div class="medallion" aria-hidden="true"></div>' : ''}
+    ${ready ? `<div class="medallion medallion--${film.slug}" aria-hidden="true"></div>` : ''}
     <div class="card__meta"><span>${ready ? 'Enter' : 'Soon'}</span><span>${ready ? 'Reel' : 'Registered'}</span></div>
   `;
   grid.append(node);

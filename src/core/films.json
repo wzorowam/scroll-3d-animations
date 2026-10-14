@@ -12,8 +12,9 @@
     "slug": "sneaker",
     "title": "Sneaker Restoration",
     "kicker": "Footwear",
-    "summary": "A worn trainer cleaned, rebuilt, and finished. Registered for a later reel.",
-    "status": "planned",
+    "summary": "Scroll drives the tools. Mud falls away, the shoe turns, and a dissolve reveals the restored trainer.",
+    "status": "ready",
+    "page": "sneaker.html",
     "accent": "#8d9a86"
   },
   {
