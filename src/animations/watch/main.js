@@ -119,6 +119,8 @@ async function startFilm() {
     studio.progress = actual;
     return actual;
   };
+  studio.pause = stopLoop;
+  studio.resume = startLoop;
 
   const observer = new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;

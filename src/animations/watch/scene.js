@@ -12,21 +12,21 @@ import {
 } from '../../core/index.js';
 
 const SCRAPER_KEYS = [
-  { t: 0, x: -1.02, y: 0.13, z: 0.46, rx: 0.42, ry: 0.7, rz: 1.2 },
-  { t: 0.12, x: -1.02, y: 0.13, z: 0.46, rx: 0.42, ry: 0.7, rz: 1.2 },
-  { t: 0.2, x: -0.4, y: 0.36, z: 0.34, rx: 1.02, ry: 0.12, rz: -0.15 },
-  { t: 0.4, x: 0.36, y: 0.34, z: 0.28, rx: 0.96, ry: -0.18, rz: 0.2 },
-  { t: 0.54, x: 0.92, y: 0.18, z: 0.5, rx: 0.4, ry: -0.65, rz: -0.85 },
-  { t: 1, x: 1.12, y: 0.12, z: 0.42, rx: 0.28, ry: -0.85, rz: -1.05 },
+  { t: 0, x: -0.78, y: 0.13, z: 0.42, rx: 0.35, ry: 0.7, rz: 0.85 },
+  { t: 0.12, x: -0.78, y: 0.13, z: 0.42, rx: 0.35, ry: 0.7, rz: 0.85 },
+  { t: 0.2, x: -0.34, y: 0.4, z: 0.62, rx: 0.62, ry: 0.45, rz: 0.35 },
+  { t: 0.4, x: 0.36, y: 0.39, z: 0.58, rx: 0.58, ry: -0.35, rz: 0.28 },
+  { t: 0.56, x: 0.86, y: 0.15, z: 0.34, rx: 0.3, ry: -0.5, rz: -0.55 },
+  { t: 1, x: 0.98, y: 0.13, z: 0.22, rx: 0.22, ry: -0.4, rz: -0.7 },
 ];
 
 const CLOTH_KEYS = [
-  { t: 0, x: 0.98, y: 0.14, z: -0.05, rx: 0.15, ry: 0.35, rz: 0.08 },
-  { t: 0.4, x: 0.98, y: 0.14, z: -0.05, rx: 0.15, ry: 0.35, rz: 0.08 },
-  { t: 0.5, x: -0.22, y: 0.38, z: 0.36, rx: 0.78, ry: 0.45, rz: 0.12 },
-  { t: 0.7, x: 0.34, y: 0.36, z: 0.3, rx: 0.82, ry: -0.25, rz: -0.08 },
-  { t: 0.84, x: 1.02, y: 0.16, z: 0.38, rx: 0.22, ry: -0.4, rz: 0.1 },
-  { t: 1, x: 1.15, y: 0.13, z: 0.12, rx: 0.16, ry: -0.15, rz: 0.04 },
+  { t: 0, x: 0.8, y: 0.13, z: 0.05, rx: 0.15, ry: 0.2, rz: 0.05 },
+  { t: 0.4, x: 0.8, y: 0.13, z: 0.05, rx: 0.15, ry: 0.2, rz: 0.05 },
+  { t: 0.5, x: -0.22, y: 0.42, z: 0.62, rx: 0.7, ry: 0.4, rz: 0.15 },
+  { t: 0.7, x: 0.28, y: 0.41, z: 0.58, rx: 0.66, ry: -0.25, rz: -0.1 },
+  { t: 0.86, x: 0.88, y: 0.14, z: 0.18, rx: 0.18, ry: 0.1, rz: 0.08 },
+  { t: 1, x: 0.96, y: 0.13, z: 0.02, rx: 0.12, ry: 0.05, rz: 0.04 },
 ];
 
 function paint(geometry, hex) {
@@ -76,37 +76,26 @@ function applyPose(mesh, pose) {
   mesh.rotation.set(pose.rx, pose.ry, pose.rz);
 }
 
-function rustMap() {
-  const canvas = document.createElement('canvas');
-  canvas.width = 512;
-  canvas.height = 512;
-  const context = canvas.getContext('2d');
-  context.fillStyle = '#a8643c';
-  context.fillRect(0, 0, 512, 512);
-  for (let i = 0; i < 2200; i += 1) {
-    const x = Math.random() * 512;
-    const y = Math.random() * 512;
-    const radius = Math.random() * 7 + 0.4;
-    const shade = Math.floor(40 + Math.random() * 90);
-    context.fillStyle = `rgba(${shade + 50}, ${Math.floor(shade * 0.45)}, ${Math.floor(shade * 0.22)}, ${0.25 + Math.random() * 0.55})`;
-    context.beginPath();
-    context.arc(x, y, radius, 0, Math.PI * 2);
-    context.fill();
+function hash3(x, y, z) {
+  const n = Math.sin(x * 127.1 + y * 311.7 + z * 74.7) * 43758.5453;
+  return n - Math.floor(n);
+}
+
+function toGrime(geometry) {
+  const color = geometry.getAttribute('color');
+  const position = geometry.getAttribute('position');
+  for (let i = 0; i < position.count; i += 1) {
+    const luma = color.getX(i) * 0.3 + color.getY(i) * 0.59 + color.getZ(i) * 0.11;
+    if (luma < 0.2) {
+      color.setXYZ(i, 0.07, 0.045, 0.03);
+      continue;
+    }
+    const n = hash3(position.getX(i), position.getY(i), position.getZ(i));
+    const pit = n > 0.72 ? 0.55 : 1;
+    color.setXYZ(i, (0.28 + n * 0.36) * pit, (0.09 + n * 0.1) * pit, 0.035 * pit);
   }
-  for (let i = 0; i < 80; i += 1) {
-    context.strokeStyle = `rgba(70, 32, 18, ${0.2 + Math.random() * 0.4})`;
-    context.lineWidth = Math.random() * 2 + 0.3;
-    context.beginPath();
-    context.moveTo(Math.random() * 512, Math.random() * 512);
-    context.lineTo(Math.random() * 512, Math.random() * 512);
-    context.stroke();
-  }
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  texture.wrapS = THREE.RepeatWrapping;
-  texture.wrapT = THREE.RepeatWrapping;
-  texture.anisotropy = 4;
-  return texture;
+  color.needsUpdate = true;
+  return geometry;
 }
 
 function shadowTexture() {
@@ -134,12 +123,12 @@ function studioEnvironment() {
   shell.scale.set(14, 9, 14);
   environment.add(shell);
 
-  const warm = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0xffc58a }));
+  const warm = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0x6a4328 }));
   warm.position.set(-3.2, 3.1, 2.4);
   warm.scale.set(5.2, 3.2, 0.3);
   environment.add(warm);
 
-  const cool = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0xa9bcdc }));
+  const cool = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0x314056 }));
   cool.position.set(4.2, 2.2, -2.4);
   cool.scale.set(2.4, 4.4, 0.3);
   environment.add(cool);
@@ -172,31 +161,31 @@ function buildBench() {
 }
 
 function buildPad() {
-  const disc = new THREE.CylinderGeometry(0.78, 0.8, 0.055, 48);
-  disc.translate(0, 0.09, 0);
-  paint(disc, '#6b3034');
-  const stitch = new THREE.TorusGeometry(0.68, 0.012, 8, 64);
+  const disc = new THREE.CylinderGeometry(0.62, 0.64, 0.04, 48);
+  disc.translate(0, 0.08, 0);
+  paint(disc, '#5c2a30');
+  const stitch = new THREE.TorusGeometry(0.52, 0.01, 8, 56);
   stitch.rotateX(Math.PI / 2);
-  stitch.translate(0, 0.12, 0);
-  paint(stitch, '#3f1c22');
+  stitch.translate(0, 0.102, 0);
+  paint(stitch, '#3a1a20');
   return mergeParts([disc, stitch]);
 }
 
 function buildCase() {
   const parts = [];
   const body = new THREE.CylinderGeometry(0.47, 0.5, 0.12, 72);
-  paint(body, '#d5d0c8');
+  paint(body, '#b7b3ac');
   parts.push(body);
 
   const lip = new THREE.CylinderGeometry(0.5, 0.5, 0.028, 72);
   lip.translate(0, 0.04, 0);
-  paint(lip, '#cfc8be');
+  paint(lip, '#a8a49c');
   parts.push(lip);
 
   const bezel = new THREE.TorusGeometry(0.455, 0.034, 16, 80);
   bezel.rotateX(Math.PI / 2);
   bezel.translate(0, 0.062, 0);
-  paint(bezel, '#e4c78a');
+  paint(bezel, '#c6a15a');
   parts.push(bezel);
 
   const ring = new THREE.TorusGeometry(0.305, 0.008, 8, 64);
@@ -222,10 +211,10 @@ function buildCase() {
   paint(bowNeck, '#d5d0c8');
   parts.push(bowNeck);
 
-  const bow = new THREE.TorusGeometry(0.085, 0.016, 10, 28);
+  const bow = new THREE.TorusGeometry(0.072, 0.014, 10, 28);
   bow.rotateY(Math.PI / 2);
-  bow.translate(0, 0.15, -0.5);
-  paint(bow, '#e6e1d8');
+  bow.translate(0, 0.12, -0.52);
+  paint(bow, '#c8c4bc');
   parts.push(bow);
 
   return mergeParts(parts);
@@ -235,7 +224,7 @@ function buildDial() {
   const parts = [];
   const plate = new THREE.CylinderGeometry(0.355, 0.355, 0.018, 64);
   plate.translate(0, 0.055, 0);
-  paint(plate, '#f3ead7');
+  paint(plate, '#e6d7bc');
   parts.push(plate);
 
   for (let i = 0; i < 12; i += 1) {
@@ -249,14 +238,17 @@ function buildDial() {
     parts.push(tick);
   }
 
-  const hour = new THREE.BoxGeometry(0.02, 0.01, 0.18);
-  hour.translate(0, 0.082, 0.05);
+  const hour = new THREE.BoxGeometry(0.016, 0.008, 0.16);
+  hour.translate(0, 0, -0.07);
+  hour.rotateY(1.05);
+  hour.translate(0, 0.084, 0);
   paint(hour, '#161513');
   parts.push(hour);
 
-  const minute = new THREE.BoxGeometry(0.014, 0.01, 0.26);
-  minute.translate(0, 0.09, 0.07);
-  minute.rotateY(2.15);
+  const minute = new THREE.BoxGeometry(0.012, 0.008, 0.24);
+  minute.translate(0, 0, -0.09);
+  minute.rotateY(-1.05);
+  minute.translate(0, 0.092, 0);
   paint(minute, '#12110f');
   parts.push(minute);
 
@@ -275,26 +267,26 @@ function buildCrystal() {
 }
 
 function buildScraper() {
-  const blade = new THREE.BoxGeometry(0.2, 0.012, 0.07);
-  paint(blade, '#d9d4cc');
-  const ferrule = new THREE.CylinderGeometry(0.026, 0.026, 0.05, 10);
+  const blade = new THREE.BoxGeometry(0.16, 0.01, 0.042);
+  paint(blade, '#c5ccd1');
+  const ferrule = new THREE.CylinderGeometry(0.016, 0.016, 0.04, 10);
   ferrule.rotateX(Math.PI / 2);
-  ferrule.translate(0, 0.02, 0.07);
+  ferrule.translate(0, 0.012, 0.04);
   paint(ferrule, '#c6a15a');
-  const handle = new THREE.CylinderGeometry(0.02, 0.024, 0.62, 12);
+  const handle = new THREE.CylinderGeometry(0.016, 0.018, 0.46, 12);
   handle.rotateX(Math.PI / 2);
-  handle.translate(0, 0.02, 0.4);
+  handle.translate(0, 0.012, 0.28);
   paint(handle, '#6a432c');
   return mergeParts([blade, ferrule, handle]);
 }
 
 function buildCloth() {
-  const pad = new THREE.SphereGeometry(0.18, 20, 14);
-  pad.scale(1.25, 0.38, 0.95);
-  paint(pad, '#243246');
-  const fold = new THREE.BoxGeometry(0.2, 0.045, 0.12);
-  fold.translate(0.04, 0.05, 0.02);
-  paint(fold, '#1b2836');
+  const pad = new THREE.SphereGeometry(0.13, 18, 12);
+  pad.scale(1.35, 0.32, 0.85);
+  paint(pad, '#3e5348');
+  const fold = new THREE.BoxGeometry(0.1, 0.03, 0.07);
+  fold.translate(0.03, 0.03, 0.01);
+  paint(fold, '#2c3d34');
   return mergeParts([pad, fold]);
 }
 
@@ -309,21 +301,20 @@ export function createWatchScene(canvas) {
   const renderer = createStudioRenderer(canvas, { mobile });
   const scene = new THREE.Scene();
   scene.background = new THREE.Color('#0c0b0a');
-  scene.fog = new THREE.Fog('#0c0b0a', 6.5, 12);
 
-  const camera = new THREE.PerspectiveCamera(mobile ? 38 : 30, 1, 0.05, 30);
+  const camera = new THREE.PerspectiveCamera(mobile ? 36 : 28, 1, 0.05, 40);
 
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(studioEnvironment(), 0.05).texture;
-  if ('environmentIntensity' in scene) scene.environmentIntensity = 1.2;
+  if ('environmentIntensity' in scene) scene.environmentIntensity = 0.95;
   pmrem.dispose();
 
-  const hemi = new THREE.HemisphereLight(0xfff3e2, 0x1a1412, 0.85);
-  const key = new THREE.DirectionalLight(0xffe3b5, 3.6);
+  const hemi = new THREE.HemisphereLight(0xfff3e2, 0x1a1412, 0.42);
+  const key = new THREE.DirectionalLight(0xffe3b5, 1.65);
   key.position.set(-2.4, 3.6, 2.2);
-  const rim = new THREE.DirectionalLight(0xb9c9ff, 2.1);
+  const rim = new THREE.DirectionalLight(0xb9c9ff, 0.55);
   rim.position.set(3.1, 1.8, -2.4);
-  const fill = new THREE.DirectionalLight(0xfff8ee, 0.75);
+  const fill = new THREE.DirectionalLight(0xfff8ee, 0.32);
   fill.position.set(0.2, 1.4, 3.2);
   const spark = new THREE.PointLight(0xffb15a, 0, 1.4);
   const gleam = new THREE.PointLight(0xfff6df, 0, 1.8);
@@ -356,40 +347,41 @@ export function createWatchScene(canvas) {
     }),
   );
   shadow.rotation.x = -Math.PI / 2;
-  shadow.position.y = 0.121;
+  shadow.position.y = 0.103;
   scene.add(bench, pad, shadow);
 
   const dissolve = createDissolveUniform(0, 0.08);
-  const caseGeometry = buildCase();
-  const dialGeometry = buildDial();
+  const casePolishGeo = buildCase();
+  const caseRustGeo = toGrime(casePolishGeo.clone());
+  const dialPolishGeo = buildDial();
+  const dialRustGeo = toGrime(dialPolishGeo.clone());
 
   const caseConceal = new THREE.MeshStandardMaterial({
-    map: rustMap(),
-    color: '#f0d2bc',
+    vertexColors: true,
     roughness: 0.94,
-    metalness: 0.22,
-    envMapIntensity: 0.35,
+    metalness: 0.2,
+    envMapIntensity: 0.28,
   });
   const caseReveal = new THREE.MeshPhysicalMaterial({
     vertexColors: true,
     color: '#ffffff',
-    roughness: 0.2,
-    metalness: 0.92,
-    clearcoat: 0.75,
-    clearcoatRoughness: 0.16,
-    envMapIntensity: 1.45,
+    roughness: 0.32,
+    metalness: 0.82,
+    clearcoat: 0.28,
+    clearcoatRoughness: 0.28,
+    envMapIntensity: 1.05,
   });
   const dialConceal = new THREE.MeshStandardMaterial({
-    color: '#6e5844',
-    roughness: 0.96,
+    vertexColors: true,
+    roughness: 0.9,
     metalness: 0.04,
     envMapIntensity: 0.2,
   });
   const dialReveal = new THREE.MeshStandardMaterial({
     vertexColors: true,
-    roughness: 0.52,
-    metalness: 0.06,
-    envMapIntensity: 0.45,
+    roughness: 0.58,
+    metalness: 0.04,
+    envMapIntensity: 0.35,
   });
 
   applyDissolve(caseConceal, dissolve, 'conceal');
@@ -404,25 +396,25 @@ export function createWatchScene(canvas) {
   dialConceal.polygonOffsetUnits = -1;
 
   const watch = new THREE.Group();
-  watch.position.set(0, 0.17, 0);
-  watch.rotation.x = 0.6;
+  watch.position.set(0, 0.32, 0);
+  watch.rotation.x = 0.34;
   const spin = new THREE.Group();
   watch.add(spin);
 
-  const caseRust = new THREE.Mesh(caseGeometry, caseConceal);
-  const casePolish = new THREE.Mesh(caseGeometry, caseReveal);
-  const dialRust = new THREE.Mesh(dialGeometry, dialConceal);
-  const dialPolish = new THREE.Mesh(dialGeometry, dialReveal);
+  const caseRust = new THREE.Mesh(caseRustGeo, caseConceal);
+  const casePolish = new THREE.Mesh(casePolishGeo, caseReveal);
+  const dialRust = new THREE.Mesh(dialRustGeo, dialConceal);
+  const dialPolish = new THREE.Mesh(dialPolishGeo, dialReveal);
   const crystal = new THREE.Mesh(
     buildCrystal(),
     new THREE.MeshPhysicalMaterial({
-      color: '#c9aa90',
-      roughness: 0.62,
+      color: '#d9c4ae',
+      roughness: 0.28,
       metalness: 0,
       transparent: true,
-      opacity: 0.48,
+      opacity: 0.18,
       depthWrite: false,
-      envMapIntensity: 1,
+      envMapIntensity: 0.8,
     }),
   );
   spin.add(caseRust, casePolish, dialRust, dialPolish, crystal);
@@ -450,16 +442,16 @@ export function createWatchScene(canvas) {
   const flakes = createFlakeField({ count: mobile ? 90 : 150 });
   scene.add(flakes.mesh);
 
-  const grimy = new THREE.Color('#c9aa90');
-  const clear = new THREE.Color('#f6f3ee');
-  const look = new THREE.Vector3(0, 0.24, 0.02);
+  const grimy = new THREE.Color('#d9c4ae');
+  const clearGlass = new THREE.Color('#f4f1ea');
+  const look = new THREE.Vector3(0, 0.34, 0);
 
   function resize() {
     const mobileNow = isMobileViewport();
     applyPixelRatio(renderer, mobileNow);
     const width = canvas.clientWidth || window.innerWidth;
     const height = canvas.clientHeight || window.innerHeight;
-    camera.fov = mobileNow ? 38 : 30;
+    camera.fov = mobileNow ? 36 : 28;
     camera.aspect = width / Math.max(height, 1);
     camera.updateProjectionMatrix();
     renderer.setSize(width, height, false);
@@ -468,13 +460,13 @@ export function createWatchScene(canvas) {
   function setProgress(progress) {
     const p = Math.min(1, Math.max(0, progress));
     dissolve.uCut.value = smoothstep(0.32, 0.86, p);
-    spin.rotation.y = lerp(-0.42, 0.95, smoothstep(0.05, 0.9, p));
+    spin.rotation.y = lerp(-0.35, 0.7, smoothstep(0.08, 0.88, p));
 
     const travel = smoothstep(0, 1, p);
     camera.position.set(
-      lerp(0.72, 0.18, travel),
-      lerp(1.02, 0.84, travel),
-      lerp(1.95, 1.62, travel),
+      lerp(0.35, 0.08, travel),
+      lerp(1.72, 1.38, travel),
+      lerp(2.55, 2.05, travel),
     );
     camera.lookAt(look);
 
@@ -484,19 +476,19 @@ export function createWatchScene(canvas) {
     flakes.apply(p, spin);
 
     const scrape = smoothstep(0.16, 0.24, p) * (1 - smoothstep(0.4, 0.52, p));
-    spark.intensity = scrape * 7;
+    spark.intensity = scrape * 1.6;
     spark.position.copy(scraper.position);
     spark.position.y += 0.06;
 
     const finish = smoothstep(0.7, 0.96, p);
-    gleam.intensity = finish * 16;
-    gleam.position.set(0.15, 0.72, 0.85);
-    key.intensity = lerp(3.1, 4.4, finish);
+    gleam.intensity = finish * 0.35;
+    gleam.position.set(0.25, 1.05, 0.9);
+    key.intensity = lerp(1.55, 1.85, finish);
 
     const cleaned = smoothstep(0.34, 0.84, p);
-    crystal.material.roughness = lerp(0.62, 0.05, cleaned);
-    crystal.material.opacity = lerp(0.5, 0.16, cleaned);
-    crystal.material.color.copy(grimy).lerp(clear, cleaned);
+    crystal.material.roughness = lerp(0.28, 0.04, cleaned);
+    crystal.material.opacity = lerp(0.22, 0.08, cleaned);
+    crystal.material.color.copy(grimy).lerp(clearGlass, cleaned);
   }
 
   function render() {

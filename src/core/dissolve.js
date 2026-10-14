@@ -80,8 +80,8 @@ export function applyDissolve(material, uniforms, mode) {
           outgoingLight += vec3(1.0, 0.38, 0.1) * edge * 2.1;
         } else {
           if (dField > uCut) discard;
-          float edge = 1.0 - smoothstep(uCut - uEdge, uCut, dField);
-          outgoingLight += vec3(1.0, 0.78, 0.48) * edge * 1.15;
+          float edge = smoothstep(uCut - uEdge, uCut, dField);
+          outgoingLight += vec3(1.0, 0.78, 0.48) * edge * 0.85;
         }
         #include <opaque_fragment>
         `,

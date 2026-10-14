@@ -21,13 +21,13 @@ export default defineConfig({
   projects: [
     {
       name: 'desktop',
-      use: { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 },
+      use: { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 },
     },
     {
       name: 'mobile',
       use: {
         viewport: { width: 390, height: 844 },
-        deviceScaleFactor: 3,
+        deviceScaleFactor: 2,
         isMobile: true,
         hasTouch: true,
       },

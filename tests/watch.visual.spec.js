@@ -20,6 +20,7 @@ test('watch scroll frames', async ({ page }, testInfo) => {
   for (const progress of frames) {
     await page.evaluate(async (value) => {
       window.__studio.scrollToProgress(value);
+      window.__studio.pause();
       await new Promise((resolve) => {
         requestAnimationFrame(() => requestAnimationFrame(resolve));
       });

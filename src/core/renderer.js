@@ -18,7 +18,7 @@ export function createStudioRenderer(canvas, { mobile = isMobileViewport() } = {
   });
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.12;
+  renderer.toneMappingExposure = 1.05;
   renderer.setClearColor('#0c0b0a', 1);
   renderer.shadowMap.enabled = false;
   applyPixelRatio(renderer, mobile);

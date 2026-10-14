@@ -23,8 +23,8 @@
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 50% 42%, transparent 28%, rgba(0, 0, 0, 0.5) 78%),
-    linear-gradient(to top, rgba(12, 11, 10, 0.78), transparent 32%);
+    radial-gradient(ellipse at 50% 38%, transparent 46%, rgba(0, 0, 0, 0.42) 84%),
+    linear-gradient(to top, rgba(12, 11, 10, 0.72), transparent 26%);
 }
 
 .topbar,
