@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0c0b0a" />
+    <meta name="description" content="A scroll-driven transformation from a roasted coffee bean to a finished espresso." />
+    <title>Coffee Bean to Espresso — Scroll Studio</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip" href="#reel">Skip to film</a>
+    <main id="film">
+      <section class="reel" id="reel" data-pin-root>
+        <div class="reel__stage" data-pin>
+          <canvas class="reel__canvas" data-canvas aria-label="Coffee bean becoming an espresso on a dark bar"></canvas>
+          <header class="topbar">
+            <a class="brand" href="/">Scroll Studio</a>
+            <p class="chapter" data-kicker>01  Roast</p>
+          </header>
+          <div class="caption" aria-live="polite">
+            <h1 data-title>A single bean</h1>
+            <p data-body>Dark, dry, and whole. The bar is quiet.</p>
+          </div>
+          <div class="rail" aria-hidden="true"><span data-rail></span></div>
+        </div>
+      </section>
+      <footer class="colophon">
+        <span>End of the reel</span>
+        <a href="/">All films</a>
+      </footer>
+    </main>
+    <div class="fallback" data-fallback hidden>
+      <header class="topbar" style="position: relative; padding-left: 0; padding-right: 0;">
+        <a class="brand" href="/">Scroll Studio</a>
+        <p class="chapter">Still</p>
+      </header>
+      <div class="fallback__still" role="img" aria-label="Espresso in a porcelain cup on a dark bar">
+        <div class="still-saucer"><div class="still-cup"></div></div>
+      </div>
+      <ol class="beats">
+        <li>
+          <span>01  Roast</span>
+          <h2>A single bean</h2>
+          <p>Dark, dry, and whole. The bar is quiet.</p>
+        </li>
+        <li>
+          <span>02  Crack</span>
+          <h2>The seam opens</h2>
+          <p>A blade works the crease. Chaff falls away.</p>
+        </li>
+        <li>
+          <span>03  Bloom</span>
+          <h2>Grounds wake</h2>
+          <p>The bean turns to grounds and swells as it spins.</p>
+        </li>
+        <li>
+          <span>04  Shot</span>
+          <h2>The dissolve</h2>
+          <p>Grounds give way. Crema settles on the espresso.</p>
+        </li>
+      </ol>
+    </div>
+    <script type="module" src="/src/animations/coffee/main.js"></script>
+  </body>
+</html>

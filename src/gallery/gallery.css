@@ -66,11 +66,14 @@
 }
 
 .card--ready {
-  grid-column: 1 / 2;
-  min-height: 460px;
   background:
     radial-gradient(420px 240px at 80% 20%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 70%),
     #14110e;
+}
+
+.card--ready:first-child {
+  grid-column: 1 / 2;
+  min-height: 460px;
 }
 
 .card__index {
@@ -89,7 +92,7 @@
   line-height: 1;
 }
 
-.card--ready h2 { font-size: clamp(2.4rem, 4vw, 3.6rem); max-width: 8ch; }
+.card--ready:first-child h2 { font-size: clamp(2.4rem, 4vw, 3.6rem); max-width: 8ch; }
 
 .card p { margin: 0; color: var(--muted); line-height: 1.45; }
 
@@ -143,6 +146,24 @@
   width: 2px;
   height: 62px;
   transform: translate(-50%, -85%) rotate(118deg);
+}
+
+.medallion--coffee {
+  width: 92px;
+  height: 70px;
+  right: 18px;
+  bottom: 64px;
+  border-radius: 8px 8px 42px 42px;
+  background:
+    linear-gradient(#f4efe6 0 16%, #e7c98a 16% 48%, #3a1c12 48% 100%);
+  box-shadow:
+    inset 0 0 0 6px #f4efe6,
+    0 16px 28px rgba(0, 0, 0, 0.35);
+}
+
+.medallion--coffee::before,
+.medallion--coffee::after {
+  content: none;
 }
 
 .card:focus-visible {
